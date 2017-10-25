@@ -1,0 +1,34 @@
+body {
+  padding: 20px;
+}
+
+/* .grid {
+  width: 1550px;
+  height: 500px;
+} */
+
+.ui-grid-cell {
+  overflow: visible;
+  z-index: 99999;
+}
+
+.ui-grid-cell, ui-select-wrap {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+ .resubmission-row-class { color: red }
+  .resubmission-row-class1 { color: green }
+ .row-class { color: black }
+ 
+ 
+ h1{
+	color:#0000FF;
+}
+
+h2{
+	color:#FF0000;
+}
