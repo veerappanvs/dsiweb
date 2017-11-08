@@ -1,0 +1,237 @@
+<div  >
+		
+		<form class="form-horizontal ng-pristine ng-invalid ng-invalid-required"   name="frm" ng-cloak>
+		
+		
+			<div >
+				<table class="table">
+					<tr>
+						<td>
+						 <button type="submit"  ng-show="detail.id == null" ng-click="addPerson()" class="btn btn-block" 
+						 data-toggle="modal" data-target="#addPersonSuccessModal" data-dismiss="modal" 
+						 aria-label="Close" ng-disabled="frm.$invalid"   ><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>  Create App</button>
+						 </td>
+						 <td>
+						 	 <button type="submit"  ng-show="detail.id == null" ng-click="reset()" class="btn btn-block" 
+						 data-toggle="modal" data-target="#addPersonSuccessModal" data-dismiss="modal" 
+						 aria-label="Close" ng-disabled="frm.$invalid"   ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>  Reset</button>
+						 </td>
+					 </tr>
+				 </table>
+			</div>
+	
+	
+			<div align="center">
+				  <button type="button"  ng-hide="detail.id == null" ng-click="markReadonlyDetail(false)" class="btn   " aria-label="Close"   ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>   Edit App</button>
+				  <button type="submit"  ng-hide="detail.id == null" ng-click="savePersonDetail()" class="btn  " ng-disabled="frm.$invalid"  aria-label="Close"   ><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Save</button>
+				  <button type="button"  ng-hide="isReadonly== null || isReadonly || detail.id == null" ng-click="markReadonlyDetail(true)"   class="btn  " aria-label="Close"   ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel</button>
+				  <button type="button"  ng-hide="detail.id == null" ng-click="removePersonDetail()" data-toggle="confirmation"  class="btn  " aria-label="Close"  ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete</button>
+			</div>
+			<br>
+			
+			
+		  <fieldset ng-disabled="isReadonly">	
+			  <div class="form-group">
+					  <div ng-show="detail.id != null">
+					  	<label class="control-label col-sm-3" for="email">Application Id:</label>
+					    <div class="col-sm-9">
+					      <!-- <p class="form-control-static">{{detail.bureau}}</p> -->
+					      <input class="form-control" ng-model="detail.id" value="{{detail.id}}" readonly>
+					    </div>
+					    <br/>
+					  </div>
+					  
+					 	<label class="control-label col-sm-3" for="email">Application Name:</label>
+					    <div class="col-sm-9">
+					      <!-- <p class="form-control-static">{{detail.bureau}}</p> -->
+					      <input class="form-control" name ="appName" ng-model="detail.appName" value="{{detail.appName}}" required  >
+					       <div class="field-message alert alert-danger " ng-messages="frm.appName.$error" ng-show="frm.appName.$invalid" ng-cloak>
+			                    <div ng-message="required">App Name is required</div>
+			       
+			                  </div>
+					        
+					    </div>
+					    <br/>
+					  
+					  
+					    <label class="control-label col-sm-3" for="email">Bureau:</label>
+					    <div class="col-sm-9">
+					      <!-- <p class="form-control-static">{{detail.bureau}}</p> -->
+					      <input class="form-control"   name="bureau" ng-model="detail.bureau" value="{{detail.bureau}}" required ng-minlength="3"  ng-pattern ="/^[a-zA-Z-\s]*$/">
+					      <div class="field-message alert alert-danger "    ng-messages="frm.bureau.$error" ng-show="frm.bureau.$invalid && frm.bureau.$touched" ng-cloak>
+			                    <p ng-message="required">Bureau is required</p>
+			                    <p ng-message="minlength">Bureau must have minimum 3 characters. Only Alphabets and  - is allowed</p>
+			                  </div>
+					    </div>
+					    <br/>
+					    
+					      <label class="control-label col-sm-3" for="email">App Acronym:</label>
+					    <div class="col-sm-9">
+					       <input class="form-control" ng-model="detail.appAcronym" value="{{detail.appAcronym}}">
+					    </div>
+					    <br/>
+					    
+					       <label class="control-label col-sm-3" for="email">Business Application Owner:</label>
+					    <div class="col-sm-9">
+					        <input class="form-control" ng-model="detail.businessApplicationOwner" value="{{detail.businessApplicationOwner}}">
+					    </div>
+					    <br/>
+					    
+					       <label class="control-label col-sm-3" for="email">Data Owner:</label>
+					    <div class="col-sm-9">
+					        <input class="form-control" ng-model="detail.dataOwner" value="{{detail.dataOwner}}">
+					    </div>
+					    <br/>
+					    
+					       <label class="control-label col-sm-3" for="email">Technical Support Lead:</label>
+					    <div class="col-sm-9">
+					      <input class="form-control" ng-model="detail.technicalSupportLead" value="{{detail.technicalSupportLead}}">
+					    </div>
+					    <br/>
+					    
+					       <label class="control-label col-sm-3" for="email">IT Program Manager:</label>
+					    <div class="col-sm-9">
+					      	      <input class="form-control" ng-model="detail.iTProgramManager" value="{{detail.iTProgramManager}}">
+					    </div>
+					    <br/>
+					    
+					       <label class="control-label col-sm-3" for="email">Vendor:</label>
+					    <div class="col-sm-9">
+					      	      <input class="form-control" ng-model="detail.vendor" value="{{detail.vendor}}">
+					    </div>
+					    <br/>
+					    
+					       <label class="control-label col-sm-3" for="email">Web Application YesOrNo:</label>
+					    <div class="col-sm-9">
+					      <input class="form-control" ng-model="detail.webApplicationYesOrNo" value="{{detail.webApplicationYesOrNo}}">
+					    </div>
+					    <br/>
+					    
+					       <label class="control-label col-sm-3" for="email">Access Database YOrN:</label>
+					    <div class="col-sm-9">
+					    <input class="form-control" ng-model="detail.accessDatabaseYOrN" value="{{detail.accessDatabaseYOrN}}">
+					    </div>
+					    <br/>
+					    
+					       <label class="control-label col-sm-3" for="email">NonAccess Database Type:</label>
+					    <div class="col-sm-9">
+					    <input class="form-control" ng-model="detail.nonAccessDatabaseType" value="{{detail.nonAccessDatabaseType}}">
+					    </div>
+					    <br/>
+					    
+					       <label class="control-label col-sm-3" for="email">Mission Critical:</label>
+					    <div class="col-sm-9">
+					       <input class="form-control" ng-model="detail.missionCritical" value="{{detail.missionCritical}}">
+					    </div>
+					    <br/>
+					    
+					       <label class="control-label col-sm-3" for="email">inidcator504:</label>
+					    <div class="col-sm-9">
+					       <input class="form-control" ng-model="detail.inidcator504" value="{{detail.inidcator504}}">
+					    </div>
+					    <br/>
+					    
+					    
+					    <label class="control-label col-sm-3" for="email">Data Classification:</label>
+					    <div class="col-sm-9">
+					       <input class="form-control" ng-model="detail.dataClassification" value="{{detail.dataClassification}}">
+					    </div>
+					    <br/>
+					    
+					    
+					    <label class="control-label col-sm-3" for="email">Active_Ind:</label>
+					    <div class="col-sm-9">
+					       <input class="form-control" ng-model="detail.activeInd" value="{{detail.activeInd}}">
+					    </div>
+					    <br/>
+					    
+					    	       <label class="control-label col-sm-3" for="email">App Description:</label>
+					    <div class="col-sm-9">
+					       <textarea class="form-control" ng-model="detail.appDescription" value="{{detail.appDescription}}"></textarea>
+					    </div>
+					    <br/>
+					    
+					    <label class="control-label col-sm-3" for="detail.email">Requires 24x7 Support:</label>
+					    <div class="col-sm-9">
+					       <input class="form-control" ng-model="detail.requires24x7Support" value="{{detail.requires24x7Support}}">
+					    </div>
+					    <br/>
+					    
+					    <label class="control-label col-sm-3" for="detail.email">Audience:</label>
+					    <div class="col-sm-9">
+					       <input class="form-control" ng-model="detail.audience" value="{{detail.audience}}">
+					    </div>
+					    <br/>
+					    	    
+					    <label class="control-label col-sm-3" for="email">Number of Users:</label>
+					    <div class="col-sm-9">
+					       <input class="form-control" name="noofusers" ng-model="detail.numberOfUsers" value="{{detail.numberOfUsers}}" ng-pattern="/^[0-9]*$/">
+					       	<div class="field-message alert alert-danger "    ng-messages="frm.noofusers.$error" ng-show="frm.noofusers.$invalid && frm.noofusers.$touched" ng-cloak>
+			                    <p ng-message="minlength">No of users must be numbers</p>
+			                </div>
+					    </div>
+					    
+					    <br/>
+					    
+					     <label class="control-label col-sm-3" for="email">Contact Person:</label>
+					    <div class="col-sm-9">
+					       <input class="form-control" ng-model="detail.contactPerson" value="{{detail.contactPerson}}">
+					    </div>
+					    <br/>
+					    
+					    <label class="control-label col-sm-3" for="email">Bureau Application Notes:</label>
+					    <div class="col-sm-9">
+					       <textarea class="form-control" ng-model="detail.bureauApplicationNotes" value="{{detail.bureauApplicationNotes}}"></textarea>
+					    </div>
+					    <br/>
+					    
+				    	<div ng-show="isAdmin">
+						    <label class="control-label col-sm-3" for="email">Server_Details:</label>
+						    <div class="col-sm-9">
+						       <input class="form-control" ng-model="detail.serverDetails" value="{{detail.serverDetails}}">
+						    </div>
+						    <br/>
+						    
+						     <label class="control-label col-sm-3" for="email" >Physical Location:</label>
+						    <div class="col-sm-9">
+						       <input class="form-control" ng-model=detail.physicalLocation value="{{detail.physicalLocation}}">
+						    </div>
+						    <br/>
+					    
+						    <label class="control-label col-sm-3" for="email">Platform:</label>
+						    <div class="col-sm-9">
+						       <input class="form-control" ng-model=detail.platform value="{{detail.platform}}">
+						    </div>
+						    <br/>
+						    
+						    <label class="control-label col-sm-3" for="email">Platform Notes:</label>
+						    <div class="col-sm-9">
+						       <textarea class="form-control" ng-model="detail.platformnotes" value="{{detail.platformnotes}}"></textarea>
+						    </div>
+						    <br/>
+				    	</div>
+			    
+			  </div>
+			  
+		  	</fieldset>
+		  	
+		  	<div>
+				 <button type="submit"  ng-show="detail.id == null" ng-click="addPerson()" class="btn btn-default" 
+				 data-toggle="modal" data-target="#addPersonSuccessModal" data-dismiss="modal" 
+				 aria-label="Close" ng-disabled="frm.$invalid"   ><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>  Create App</button>
+				 
+				 	 <button type="submit"  ng-show="detail.id == null" ng-click="reset()" class="btn btn-default" 
+				 data-toggle="modal" data-target="#addPersonSuccessModal" data-dismiss="modal" 
+				 aria-label="Close" ng-disabled="frm.$invalid"   ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>  Reset</button>
+				 
+				  <button type="button"  ng-hide="detail.id == null" ng-click="markReadonlyDetail(false)" class="btn btn-default  " aria-label="Close"  class="col-sm-3" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>   Edit App</button>
+				  <button type="submit"  ng-hide="detail.id == null" ng-click="savePersonDetail()" class="btn btn-default " aria-label="Close" ng-disabled="frm.$invalid"  class="col-sm-3" ><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Save</button>
+				  <button type="button"  ng-hide="isReadonly== null || isReadonly || detail.id == null" ng-click="markReadonlyDetail(true)"   class="btn btn-default " aria-label="Close"  class="col-sm-3" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel</button>
+				  <button type="button"  ng-hide="detail.id == null" ng-click="removePersonDetail()" data-toggle="confirmation"  class="btn btn-default " aria-label="Close"  class="col-sm-3" ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete</button>
+		
+			</div>
+		</form>
+		
+</div>
+
+	

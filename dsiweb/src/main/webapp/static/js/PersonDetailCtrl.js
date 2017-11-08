@@ -1,7 +1,23 @@
-function PersonDetailCtrl($scope, $http, $routeParams, $location) {
+function PersonDetailCtrl($rootScope, $scope, $http, $routeParams, $location, $window) {
 	
 	
+	$scope.isAdmin=$rootScope.isAdmin;
+	console.log(' PersonDetailCtrl- $scope.isAdmin = '+$scope.isAdmin);
 	
+	//$scope.isReadonly=true;
+	 $scope.markReadonly = function(toggle){
+		  $scope.isReadonly=toggle;
+	 }
+	
+/*	 if($scope.data == null && $scope.isReadonly == null ){
+	//	 $scope.markReadonly(false);
+		 $scope.enableCancelButton = false;
+	 }*/
+/*	 console.log('isReadonly && (data.id == null) condition '+$scope.isReadonly && ($scope.data == null));
+	 console.log('$scope.isReadonly'+$scope.isReadonly );
+	 console.log('$scope.data is null '+($scope.data == null) );
+	 console.log('$scope.enableCancelButton '+($scope.enableCancelButton) );*/
+
 	
 	if($routeParams.personDetailId != undefined){
 		$scope.isReadonly=true;
@@ -20,23 +36,24 @@ function PersonDetailCtrl($scope, $http, $routeParams, $location) {
 	    		}
 	    );
 	}
+	
 	 $scope.addPerson = function(){
 		  	
 		 	$scope.master = {};
 	  		var inventory = $scope.data;
 	  		console.log('Inventory Data '+$scope.data); 
-	        $http.post('http://localhost:8080/dsiweb/inv/inventory', inventory)
+	        $http.post('inv/inventory', inventory)
 	        .then(
 	        		function(response) {
-	        			
 	        			$scope.data = response.data;
 	        			$scope.markReadonly(true);
 	        			console.log('Added application : '+response.location);
-	        			//$location.path('dsiweb/dashboard#!/detail/'+$scope.data.id);
-	        		}/*, 
+	        			
+	        		}, 
 	        		function(response) {
-	        			console.log("Error While posting the data"); 
-	        		}*/
+	        			console.log("Error While posting the data"+response.data.errorMessage); 
+	        			$location.path('detail'+$scope.data.errorForwardPage);
+	        		}
 	        		
 	        );  
 	
@@ -45,45 +62,54 @@ function PersonDetailCtrl($scope, $http, $routeParams, $location) {
 	 $scope.savePerson = function(){
 		  
 	  		var inventory = $scope.data;
-	  		console.log('Inventory Data put'+$scope.data); 
+	  		console.log('Inventory Data put   '+$scope.data); 
 	  		$scope.markReadonly(true);
-	  		console.log('Marking readonly '); 
-	        $http.put('http://localhost:8080/dsiweb/inv/inventory', inventory)
+	  		console.log('Marking readonly '+$scope.isReadonly); 
+	        $http.put('inv/inventory', inventory)
 	        .then(
 	        		
 	        		function(response) {
-	        			$scope.data = response.data;
+	        			$scope.detail = response.data;
 	        			console.log('Inventory Data put after response '+response.data); 
+		    			$scope.isSuccess=true;
+	        			console.log("isSuccess "+$scope.isSuccess);
 	        			//$location.path('dsiweb/dashboard#!/detail/'+$scope.data.id);
-	        		}/*, 
-	        		function(response) {
-	        			console.log("Error While posting the data"); 
-	        		}*/
+		        		}, 
+		        		function(response) {
+		        			console.log("Error While modifying the data "+response); 
+		        		}
 	        		
 	        );  
 	
 	 }
+
 	 
-	 $scope.markReadonly = function(toggle){
-		  $scope.isReadonly=toggle;
-	 }
-	
+	 
 	 $scope.reset = function(){
 		 $scope.data = angular.copy($scope.master);
 	 }
+	 	 
 	 
-	 
-	 $scope.removePerson = function(){
+	 $scope.removePerson = function($location, $window){
 		 console.log('Inventory Data delete '+$scope.data.id); 
-		 var inventory = $scope.data;
-		  $http.delete('http://localhost:8080/dsiweb/inv/inventory/'+$scope.data.id)
+		 $scope.markReadonly(false);
+		 //var inventory = $scope.data;
+		  $http.delete('inv/inventory/'+$scope.data.id)
 	        .then(
+	        		
 	        		function(response) {
+	        			 //$scope.reset();
 	        			$scope.data = response.data;
-	        		}/*, 
+	        			 console.log('Inventory Data deleted successfully '); 
+		        		//$location.path('#!detail');
+		        		//console.log('location.path = '+$location.absUrl());
+	        			 window.location.href = '#!detail';
+	        			 //$location.url = '#!detail';
+
+	        		}, 
 	        		function(response) {
-	        			console.log("Error While posting the data"); 
-	        		}*/
+	        			console.log("Error While deleting the data"+response); 
+	        		}
 	        		
 	        );  
 	 }

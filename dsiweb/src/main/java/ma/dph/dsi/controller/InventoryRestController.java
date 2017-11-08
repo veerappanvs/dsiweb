@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import ma.dph.dsi.entity.ErrorDetails;
 import ma.dph.dsi.entity.Inventory;
 import ma.dph.dsi.repository.InventoryRepository;
 
@@ -44,7 +46,7 @@ public class InventoryRestController {
         return new ResponseEntity<List<Inventory>>(inventories, HttpStatus.OK);
     }
     
-    
+    @CrossOrigin
     @RequestMapping(value = "/inventory/{id}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Inventory> findByAppNameById(@PathVariable("id") String id) {
 
@@ -72,24 +74,29 @@ public class InventoryRestController {
     
     
     //@RequestMapping(value = "/inventory/", method = RequestMethod.POST)
+    @CrossOrigin
     @PostMapping(value = "/inventory")
-    public ResponseEntity<?> createInventory(@RequestBody Inventory inventory, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<?> createInventory(@RequestBody Inventory inventory) {
     	
-        log.debug("Creating inventory :------ "+ inventory);
+        log.debug("Creating inventory :------"+ inventory+"-");
  
         if (inventory != null  && service.findByAppNameIgnoreCaseContaining(inventory.getAppName()).size() > 0  ) {
             log.error("Unable to create  Application with name" +   inventory.getAppName() + " already exist.");
-            return new ResponseEntity<String>(("Unable to create  Application with name " +   inventory.getAppName() + " already exist."),HttpStatus.CONFLICT);
+            ErrorDetails errorDetails = new ErrorDetails();
+            errorDetails.setErrorMessage("Unable to create  Application with name " +   inventory.getAppName() + " already exist.");
+            errorDetails.setErrorForwardPage("detail");
+            return new ResponseEntity<ErrorDetails>(errorDetails,HttpStatus.CONFLICT);
         }
         service.saveAndFlush(inventory);
  
-        HttpHeaders headers = new HttpHeaders();
+      /*  HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/api/user/{id}").buildAndExpand(inventory.getId()).toUri());
-        log.debug("Created Application Succesfully:------ "+ headers.getLocation());
+        log.debug("Created Application Succesfully:------ "+ headers.getLocation());*/
         
         return new ResponseEntity<Inventory>(inventory, HttpStatus.CREATED);
     }
     
+    @CrossOrigin
     @PutMapping(value = "/inventory")
     public ResponseEntity<?> updateInventory(@RequestBody Inventory inventory, UriComponentsBuilder ucBuilder) {
     	
@@ -107,22 +114,22 @@ public class InventoryRestController {
         return new ResponseEntity<Inventory>(inventory, HttpStatus.OK);
     }
     
-    
-    @DeleteMapping(value = "/inventory{id}")
+    @CrossOrigin
+    @DeleteMapping(value = "/inventory/{id}")
     public ResponseEntity<?> deleteInventory(@PathVariable("id") String id) {
     	
-        log.debug("Deleting inventory :------ "+ id);
+        log.debug("Deleting inventory :------"+ id+"-");
         Inventory inventory =  service.findOne(Integer.valueOf(id));
-        if ( inventory != null ) {
-        	log.error("Unable to Delete application. Application "+ inventory.getAppName()+" not found.");
-            return new ResponseEntity<String>(("Unable to delete Application. Application "+ inventory.getAppName()+" not found."),HttpStatus.CONFLICT);
+        if ( inventory == null ) {
+        	log.error("Unable to Delete application. Application for the  "+ id+" not found.");
+            return new ResponseEntity<String>(("Unable to delete Application. Application   for the  "+ id+" not found."),HttpStatus.CONFLICT);
         }
         service.delete(inventory);
  
-       // HttpHeaders headers = new HttpHeaders();
+        HttpHeaders headers = new HttpHeaders();
       //  headers.setLocation(ucBuilder.path("/api/user/{id}").buildAndExpand(inventory.getId()).toUri());
         log.debug("Deleted Application Succesfully:------ "); 
-        return new ResponseEntity<Inventory>(inventory, HttpStatus.OK);
+        return new ResponseEntity<String>(headers, HttpStatus.OK);
     }
 
 

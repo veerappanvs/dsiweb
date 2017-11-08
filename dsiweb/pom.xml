@@ -6,7 +6,7 @@
 	<groupId>dph.state.ma.us</groupId>
 	<artifactId>dsiweb</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>dsiweb</name>
 	<description>DSI Web Application</description>
@@ -73,10 +73,15 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
 		</dependency>
-		
+		 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+	
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
 		</dependency>
 		
 <!-- 		<dependency>
@@ -119,7 +124,7 @@
 			</plugin>
 		</plugins>
 		<!-- <finalName>dsiweb${rp.build.warname}</finalName> -->
-		<finalName>dsiweb${rp.build.warname}</finalName>
+		<finalName>dsiweb</finalName>
 		
 	</build>
 

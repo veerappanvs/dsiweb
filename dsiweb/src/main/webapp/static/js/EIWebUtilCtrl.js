@@ -1,3 +1,5 @@
+var EIWebUtilCtrl = function ($rootscope, $http) {
+
 /*function getDataForURI(uri) {
 	// console.log("Getting the detail page1 "+$scope.searchText);
 	$http.get(uri).then(function(response) {
@@ -5,7 +7,25 @@
 		$scope.data = response.data;
 		console.log("getDataForURI : " + uri + " " + $scope.data.length);
 	});
-};
+};*/
+
+
+//function getDataForURI($http, $rootScope) {
+// console.log("Getting the detail page1 "+$scope.searchText);
+/*$http.get("http://localhost:8080/dsiweb/user").
+	then(
+			function(response) {
+				$rootScope.userName = response.data.authorities.name;
+				$scope.user = response.data.authorities.name;
+	
+				console.log('$rootScope.userName =='+$rootScope.userName);
+				$rootScope.userRole = response.data.authorities.authority;
+				$scope.role = response.data.authorities.authority;
+	
+				console.log('$rootScope.userRole == '+$rootScope.userRole);
+			}
+		);
+//};
 */
 
 
@@ -27,3 +47,4 @@
  * .then(function(response){ return response.data; }); });
  */
 
+}
