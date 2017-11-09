@@ -1,4 +1,9 @@
 <div  >
+		<div>
+		 <button type="submit"  ng-show="detail.id == null" onclick="window.location.href='dashboard'" class="btn btn-block" 
+						 data-toggle="modal" data-target="#addPersonSuccessModal" data-dismiss="modal" 
+						 aria-label="Close"   ><span class="glyphicon glyphicon glyphicon-arrow-left" aria-hidden="true"></span>  Back To dashboard</button>
+		</div>
 		
 		<form class="form-horizontal ng-pristine ng-invalid ng-invalid-required"   name="frm" ng-cloak>
 		
@@ -12,9 +17,14 @@
 						 aria-label="Close" ng-disabled="frm.$invalid"   ><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>  Create App</button>
 						 </td>
 						 <td>
-						 	 <button type="submit"  ng-show="detail.id == null" ng-click="reset()" class="btn btn-block" 
+						 <button type="submit"  ng-show="detail.id == null" ng-click="reset()" class="btn btn-block" 
 						 data-toggle="modal" data-target="#addPersonSuccessModal" data-dismiss="modal" 
 						 aria-label="Close" ng-disabled="frm.$invalid"   ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>  Reset</button>
+						 </td>
+						 <td>
+						 <button type="submit"  ng-show="detail.id == null" ng-click="window.location.href='#!detail'" class="btn btn-block" 
+						 data-toggle="modal" data-target="#addPersonSuccessModal" data-dismiss="modal" 
+						 aria-label="Close"   ><span class="glyphicon glyphicon glyphicon-arrow-left" aria-hidden="true"></span>  Back To search</button>
 						 </td>
 					 </tr>
 				 </table>
@@ -26,6 +36,7 @@
 				  <button type="submit"  ng-hide="detail.id == null" ng-click="savePersonDetail()" class="btn  " ng-disabled="frm.$invalid"  aria-label="Close"   ><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Save</button>
 				  <button type="button"  ng-hide="isReadonly== null || isReadonly || detail.id == null" ng-click="markReadonlyDetail(true)"   class="btn  " aria-label="Close"   ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel</button>
 				  <button type="button"  ng-hide="detail.id == null" ng-click="removePersonDetail()" data-toggle="confirmation"  class="btn  " aria-label="Close"  ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete</button>
+				  <button type="submit"  ng-hide="detail.id == null" ng-click="window.location.href='#!detail'"  data-dismiss="modal"   class="btn "><span class="glyphicon glyphicon glyphicon-arrow-left" aria-hidden="true"></span>  Back To Search</button>
 			</div>
 			<br>
 			
@@ -215,20 +226,35 @@
 			  
 		  	</fieldset>
 		  	
-		  	<div>
-				 <button type="submit"  ng-show="detail.id == null" ng-click="addPerson()" class="btn btn-default" 
-				 data-toggle="modal" data-target="#addPersonSuccessModal" data-dismiss="modal" 
-				 aria-label="Close" ng-disabled="frm.$invalid"   ><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>  Create App</button>
-				 
-				 	 <button type="submit"  ng-show="detail.id == null" ng-click="reset()" class="btn btn-default" 
-				 data-toggle="modal" data-target="#addPersonSuccessModal" data-dismiss="modal" 
-				 aria-label="Close" ng-disabled="frm.$invalid"   ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>  Reset</button>
-				 
-				  <button type="button"  ng-hide="detail.id == null" ng-click="markReadonlyDetail(false)" class="btn btn-default  " aria-label="Close"  class="col-sm-3" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>   Edit App</button>
-				  <button type="submit"  ng-hide="detail.id == null" ng-click="savePersonDetail()" class="btn btn-default " aria-label="Close" ng-disabled="frm.$invalid"  class="col-sm-3" ><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Save</button>
-				  <button type="button"  ng-hide="isReadonly== null || isReadonly || detail.id == null" ng-click="markReadonlyDetail(true)"   class="btn btn-default " aria-label="Close"  class="col-sm-3" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel</button>
-				  <button type="button"  ng-hide="detail.id == null" ng-click="removePersonDetail()" data-toggle="confirmation"  class="btn btn-default " aria-label="Close"  class="col-sm-3" ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete</button>
-		
+			<div >
+				<table class="table">
+					<tr>
+						<td>
+						 <button type="submit"  ng-show="detail.id == null" ng-click="addPerson()" class="btn btn-block" 
+						 data-toggle="modal" data-target="#addPersonSuccessModal" data-dismiss="modal" 
+						 aria-label="Close" ng-disabled="frm.$invalid"   ><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>  Create App</button>
+						 </td>
+						 <td>
+						 	 <button type="submit"  ng-show="detail.id == null" ng-click="reset()" class="btn btn-block" 
+						 data-toggle="modal" data-target="#addPersonSuccessModal" data-dismiss="modal" 
+						 aria-label="Close" ng-disabled="frm.$invalid"   ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>  Reset</button>
+						 </td>
+						 <td>
+						 <button type="submit"  ng-show="detail.id == null" ng-click="window.location.href='dashboard'" class="btn btn-block" 
+						 data-toggle="modal" data-target="#addPersonSuccessModal" data-dismiss="modal" 
+						 aria-label="Close"   ><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>  Back To search</button>
+						 </td>
+					 </tr>
+				 </table>
+			</div>
+	
+	
+			<div align="center">
+				  <button type="button"  ng-hide="detail.id == null" ng-click="markReadonlyDetail(false)" class="btn   " aria-label="Close"   ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>   Edit App</button>
+				  <button type="submit"  ng-hide="detail.id == null" ng-click="savePersonDetail()" class="btn  " ng-disabled="frm.$invalid"  aria-label="Close"   ><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Save</button>
+				  <button type="button"  ng-hide="isReadonly== null || isReadonly || detail.id == null" ng-click="markReadonlyDetail(true)"   class="btn  " aria-label="Close"   ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel</button>
+				  <button type="button"  ng-hide="detail.id == null" ng-click="removePersonDetail()" data-toggle="confirmation"  class="btn  " aria-label="Close"  ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete</button>
+  				  <button type="submit"  ng-hide="detail.id == null" ng-click="window.location.href='#!detail'"  data-dismiss="modal"   class="btn "><span class="glyphicon glyphicon glyphicon-arrow-left" aria-hidden="true"></span>  Back To search</button>
 			</div>
 		</form>
 		

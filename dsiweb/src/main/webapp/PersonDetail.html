@@ -1,6 +1,11 @@
 
 <div class="container" ng-controller="PersonDetailCtrl">
 	<div>
+		 <button type="submit"  ng-show="detail.id == null" onclick="window.location.href='dashboard'"  class="btn btn-block" 
+						 
+						 aria-label="Close"   ><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>  Back To Dashboard</button>
+	</div>
+	<div>
 		<form class="form-horizontal ng-pristine ng-invalid ng-invalid-required"   name="frm" ng-cloak>
 		<h3 ng-hide="data.id == null" ><span class="label label-default">{{data.appName}}</span></h3> 
 		<div>
@@ -8,12 +13,12 @@
 
 				<tr>
 					<td>
-						<button type="submit"  ng-show="data.id == null" ng-click="addPerson()" class="btn btn-block"  class="col-sm-6"
+						<button type="submit"  ng-show="data.id == null" ng-click="addPerson()" class="btn btn-block"  
 					 	data-toggle="modal" data-target="#addPersonSuccessModal" data-dismiss="modal" 
 					 	aria-label="Close" ng-disabled="frm.$invalid"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>  Create App</button>
 				 	</td>
 					<td>
-						<button type="submit"  ng-show="data.id == null" ng-click="reset()" class="btn btn-block" 	class="col-sm-6"
+						<button type="submit"  ng-show="data.id == null" ng-click="reset()" class="btn btn-block" 	
 				 		data-toggle="modal" data-target="#addPersonSuccessModal" data-dismiss="modal" 
 				 		aria-label="Close" ng-disabled="frm.$invalid"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>  Reset</button>
 					</td>
@@ -239,6 +244,11 @@
 					 		data-toggle="modal" data-target="#addPersonSuccessModal" data-dismiss="modal" 
 					 		aria-label="Close" ng-disabled="frm.$invalid"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>  Reset</button>
 						</td>
+						 <td>
+						 <button type="submit"  ng-show="detail.id == null" ng-click="window.location.href='#!detail'" class="btn btn-block" 
+						 data-toggle="modal" data-target="#addPersonSuccessModal" data-dismiss="modal" 
+						 aria-label="Close"   ><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>  Back To Dashboard</button>
+						 </td>
 					</tr>
 					<tr>
 						<td></td><td></td>
