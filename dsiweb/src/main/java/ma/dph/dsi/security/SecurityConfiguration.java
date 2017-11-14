@@ -28,7 +28,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	   static Logger log = Logger.getLogger(SecurityConfiguration.class.getName());
 
-	private static String REALM="MY_TEST_REALM";
+	//TODO Check the realm name   
+	private static String REALM="DSI";
 		
 	 @Autowired
 	 DataSource dataSource;
@@ -46,8 +47,34 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				   "select User_Id USERNAME, User_Role AUTHORITY from tbl_users where User_Id=?");
 	}
 	 
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+	 
+/*	    http
+	    .httpBasic().and()
+	    .authorizeRequests()
+	        .antMatchers("/index.html", "/home.html", "/login.html", "/app.html", "/", "/home", "/login", "/Access_Denied").permitAll()
+	        .anyRequest().authenticated()
+	        .and()
+	        .formLogin()
+            .loginPage("/login");*/
+		
+		  http.csrf().disable()
+          .authorizeRequests()
+          .antMatchers("/webjars/**").permitAll()		
+          	.antMatchers("/static/**").permitAll()		
+      	  	  .antMatchers("/resources/**").permitAll()	
+              .anyRequest().authenticated()
+              .and()
+          .formLogin()
+              .loginPage("/login")
+              .permitAll()
+		  .and()
+          .logout()                                    
+              .permitAll();
+	}
 
-
+/*
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
  
@@ -62,18 +89,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		//.antMatchers("/**").hasRole("ADMIN")
 		.and().httpBasic().realmName(REALM).authenticationEntryPoint(getBasicAuthEntryPoint()).and().logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());;
 		 
-		/* http
+		 http
          .httpBasic().and()
          .authorizeRequests()
              .antMatchers("/**").permitAll()
              .anyRequest().authenticated()
              .and()
          .csrf()
-             .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());*/
+             .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 	  
 	    http.cors().and().authorizeRequests()
         .anyRequest().authenticated();
- 	}
+ 	}*/
 	
 	@Bean
 	public CustomBasicAuthenticationEntryPoint getBasicAuthEntryPoint(){

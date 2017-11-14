@@ -19,10 +19,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.Ordered;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.CookieClearingLogoutHandler;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.security.web.authentication.rememberme.AbstractRememberMeServices;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,9 +64,29 @@ public class DSIwebApplication extends SpringBootServletInitializer {
 	public Map<String,String> token(HttpSession session) {
 		return Collections.singletonMap("token", session.getId());
 	}
+    
+    
+	
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String loginPage(Model model){
+		//log.debug("Welcome page: Session Id " + httpSession.getId() + " Creation Time: " + httpSession.getCreationTime());
+//		httpSession.invalidate();
+//		SecurityContextHolder.clearContext();
+		System.out.println("login ==>");
+
+		return "login";
+	}
      
+    @RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
+	public String accessDeniedPage(ModelMap model) {
+		System.out.println("Access denied==>");
+    	model.addAttribute("user", getPrincipal());
+		
+		return "accessDenied";
+	}
+    
     //@RequestMapping(value="/logout", method = RequestMethod.GET)
-    @PostMapping("/logout")
+/*    @PostMapping("/logout")
     public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
     	System.out.println("logout ========>" );
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -76,7 +99,7 @@ public class DSIwebApplication extends SpringBootServletInitializer {
     
 
         return "redirect:/dsiweb";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
-    }
+    }*/
     
     
 /*    @Bean
@@ -110,4 +133,16 @@ public class DSIwebApplication extends SpringBootServletInitializer {
     public static void main(String[] args) {
         configureApplication(new SpringApplicationBuilder()).run(args);
     }*/
+    
+	private String getPrincipal(){
+		String userName = null;
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		if (principal instanceof UserDetails) {
+			userName = ((UserDetails)principal).getUsername();
+		} else {
+			userName = principal.toString();
+		}
+		return userName;
+	}
 }

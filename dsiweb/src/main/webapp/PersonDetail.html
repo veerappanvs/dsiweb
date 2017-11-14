@@ -7,7 +7,9 @@
 	</div>
 	<div>
 		<form class="form-horizontal ng-pristine ng-invalid ng-invalid-required"   name="frm" ng-cloak>
-		<h3 ng-hide="data.id == null" ><span class="label label-default">{{data.appName}}</span></h3> 
+		<h4 ng-show="data.hasInserted" ><span class="alert-success " class="text-center">App created with the name  {{data.appName}}</span></h4> 
+		<h4 ng-show="data.isDuplicateApp" ><span class="alert-danger " class="text-center">App {{data.appName}} already exists. Please search the app and edit if you want to make changes</span></h4> 
+		
 		<div>
 			<table class="table ">
 
@@ -30,9 +32,6 @@
 			</table>
 		</div>
 		<div>
-			 
-			 
-			 
 		</div>
 		<div>	
 		 	<table class="table">

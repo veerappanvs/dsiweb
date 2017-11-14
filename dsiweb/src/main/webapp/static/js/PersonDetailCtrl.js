@@ -48,11 +48,15 @@ function PersonDetailCtrl($rootScope, $scope, $http, $routeParams, $location, $w
 	        			$scope.data = response.data;
 	        			$scope.markReadonly(true);
 	        			console.log('Added application : '+response.location);
+	        			$scope.data.hasInserted=true;
 	        			
 	        		}, 
 	        		function(response) {
-	        			console.log("Error While posting the data"+response.data.errorMessage); 
-	        			$location.path('detail'+$scope.data.errorForwardPage);
+	        			console.log("Error While posting the data ---> "+response.status );
+	        			if(response.status==409){
+        					$scope.data.isDuplicateApp=true;
+        				}
+	        			$location.path('detail');
 	        		}
 	        		
 	        );  
@@ -64,6 +68,7 @@ function PersonDetailCtrl($rootScope, $scope, $http, $routeParams, $location, $w
 	  		var inventory = $scope.data;
 	  		console.log('Inventory Data put   '+$scope.data); 
 	  		$scope.markReadonly(true);
+	  		$scope.data.hasInserted=false;
 	  		console.log('Marking readonly '+$scope.isReadonly); 
 	        $http.put('inv/inventory', inventory)
 	        .then(
