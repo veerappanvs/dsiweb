@@ -11,6 +11,12 @@ function PersonSearchCtrl($rootScope, $scope, $http, $location) {
 	 $scope.markReadonlyDetail = function(toggle){
 		  $scope.isReadonly=toggle;
 	 }
+	 
+	 $scope.editAppFn = function(toggle){
+		 console.log("Editapp");
+		 $scope.markReadonlyDetail(false);
+		 $scope.isEditEnabled=true;
+	 }
 	
 	 $scope.savePersonDetail = function(){
 		  

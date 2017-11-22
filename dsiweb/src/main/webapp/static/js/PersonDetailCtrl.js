@@ -2,11 +2,18 @@ function PersonDetailCtrl($rootScope, $scope, $http, $routeParams, $location, $w
 	
 	
 	$scope.isAdmin=$rootScope.isAdmin;
+	$scope.isEditEnabled=false;
+
 	console.log(' PersonDetailCtrl- $scope.isAdmin = '+$scope.isAdmin);
 	
 	//$scope.isReadonly=true;
 	 $scope.markReadonly = function(toggle){
 		  $scope.isReadonly=toggle;
+	 }
+	 
+	 $scope.editAppFn = function(toggle){
+		 $scope.markReadonly(false);
+		 $scope.isEditEnabled=true;
 	 }
 	
 /*	 if($scope.data == null && $scope.isReadonly == null ){

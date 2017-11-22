@@ -41,3 +41,16 @@ body, .form-control{
 .custom-width {
     width: 80px !important;
 }
+
+.bg-1 { 
+    background-color: #D8D8D8 ;
+    color: #08088A;
+ }
+ .enterButton{
+	position: absolute;
+	top: 660px; 
+	left: 330px;
+	width: 70px;
+	height: 70px;
+	text-align: center;
+}

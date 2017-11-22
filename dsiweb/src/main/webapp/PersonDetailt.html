@@ -32,7 +32,7 @@
 	
 	
 			<div align="center">
-				  <button type="button"  ng-hide="detail.id == null" ng-click="markReadonlyDetail(false)" class="btn   " aria-label="Close"   ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>   Edit App</button>
+				  <button type="button"  ng-hide="detail.id == null" ng-click="editAppFn()" class="btn   " aria-label="Close"   ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>   Edit App</button>
 				  <button type="submit"  ng-hide="detail.id == null" ng-click="savePersonDetail()" class="btn  " ng-disabled="frm.$invalid"  aria-label="Close"   ><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Save</button>
 				  <button type="button"  ng-hide="isReadonly== null || isReadonly || detail.id == null" ng-click="markReadonlyDetail(true)"   class="btn  " aria-label="Close"   ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel</button>
 				  <button type="button"  ng-hide="detail.id == null" ng-click="removePersonDetail()" data-toggle="confirmation"  class="btn  " aria-label="Close"  ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete</button>
@@ -55,7 +55,7 @@
 					 	<label class="control-label col-sm-3" for="email">Application Name:</label>
 					    <div class="col-sm-9">
 					      <!-- <p class="form-control-static">{{detail.bureau}}</p> -->
-					      <input class="form-control" name ="appName" ng-model="detail.appName" value="{{detail.appName}}" required  >
+					      <input class="form-control" name ="appName" ng-model="detail.appName" value="{{detail.appName}}" ng-readonly="isEditEnabled"   >
 					       <div class="field-message alert alert-danger " ng-messages="frm.appName.$error" ng-show="frm.appName.$invalid" ng-cloak>
 			                    <div ng-message="required">App Name is required</div>
 			       
@@ -250,7 +250,7 @@
 	
 	
 			<div align="center">
-				  <button type="button"  ng-hide="detail.id == null" ng-click="markReadonlyDetail(false)" class="btn   " aria-label="Close"   ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>   Edit App</button>
+				  <button type="button"  ng-hide="detail.id == null" ng-click="editAppFn()" class="btn   " aria-label="Close"   ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>   Edit App</button>
 				  <button type="submit"  ng-hide="detail.id == null" ng-click="savePersonDetail()" class="btn  " ng-disabled="frm.$invalid"  aria-label="Close"   ><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Save</button>
 				  <button type="button"  ng-hide="isReadonly== null || isReadonly || detail.id == null" ng-click="markReadonlyDetail(true)"   class="btn  " aria-label="Close"   ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel</button>
 				  <button type="button"  ng-hide="detail.id == null" ng-click="removePersonDetail()" data-toggle="confirmation"  class="btn  " aria-label="Close"  ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete</button>

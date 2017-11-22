@@ -36,7 +36,7 @@
 		<div>	
 		 	<table class="table">
 		 		<tr>
-					<td><button type="button"  ng-hide="data.id == null" ng-click="markReadonly(false)" class="btn btn-block"  aria-label="Close"  class="col-sm-3" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>   Edit App</button></td>
+					<td><button type="button"  ng-hide="data.id == null" ng-click="editAppFn()" class="btn btn-block"  aria-label="Close"  class="col-sm-3" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>   Edit App</button></td>
 					<td><button type="submit"  ng-hide="data.id == null" ng-click="savePerson()" class="btn btn-block " aria-label="Close" ng-disabled="frm.$invalid" class="col-sm-3" ><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Save</button></td>
 					<td><button type="button"  ng-hide="data.id == null" ng-click="removePerson()" data-toggle="confirmation"  class="btn btn-block " aria-label="Close"  class="col-sm-3" ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete</button></td>
 					<td><button type="button"  ng-hide="isReadonly== null || isReadonly || data.id == null" ng-click="markReadonly(true)"   class="btn btn-block " aria-label="Close"  class="col-sm-3" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel</button></td>
@@ -58,7 +58,7 @@
 		 	<label class="control-label col-sm-3" for="email">Application Name:</label>
 		    <div class="col-sm-9">
 		      <!-- <p class="form-control-static">{{data.bureau}}</p> -->
-		      <input class="form-control" name ="appName" ng-model="data.appName" value="{{data.appName}}" required  >
+		      <input class="form-control" name ="appName" ng-model="data.appName" value="{{data.appName}}" ng-readonly="isEditEnabled"  >
 		       <div class="field-message alert alert-danger " ng-messages="frm.appName.$error" ng-show="frm.appName.$invalid" ng-cloak>
                     <div ng-message="required">App Name is required</div>
        
@@ -243,14 +243,6 @@
 					 		data-toggle="modal" data-target="#addPersonSuccessModal" data-dismiss="modal" 
 					 		aria-label="Close" ng-disabled="frm.$invalid"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>  Reset</button>
 						</td>
-						 <td>
-						 <button type="submit"  ng-show="detail.id == null" ng-click="window.location.href='#!detail'" class="btn btn-block" 
-						 data-toggle="modal" data-target="#addPersonSuccessModal" data-dismiss="modal" 
-						 aria-label="Close"   ><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>  Back To Dashboard</button>
-						 </td>
-					</tr>
-					<tr>
-						<td></td><td></td>
 					</tr>
 				</table>
 			</div> 
@@ -266,5 +258,10 @@
 			</div>
 		</form>
 	</div>
+	<div>
+		<button type="submit" ng-show="detail.id == null" 	onclick="window.location.href='dashboard'" class="btn btn-block" aria-label="Close">
+			<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>		Back To Dashboard		</button>
+	</div>
+
 </div>
 
