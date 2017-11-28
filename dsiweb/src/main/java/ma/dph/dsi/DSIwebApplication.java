@@ -66,6 +66,14 @@ public class DSIwebApplication extends SpringBootServletInitializer {
 	}
     
     
+    @RequestMapping("/dashboard")
+	public String dashboard(Model model){
+		//log.debug("Welcome page: Session Id " + httpSession.getId() + " Creation Time: " + httpSession.getCreationTime());
+//		httpSession.invalidate();
+//		SecurityContextHolder.clearContext();
+		return "dashboard";
+	}
+    
 	
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage(Model model){
