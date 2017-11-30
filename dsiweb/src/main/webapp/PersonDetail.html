@@ -1,7 +1,7 @@
 
 <div class="container" ng-controller="PersonDetailCtrl">
 	<div>
-		 <button type="submit"  ng-show="detail.id == null" onclick="window.location.href='dashboard'"  class="btn btn-block" 
+		 <button type="submit"   onclick="window.location.href='dashboard'"  class="btn btn-block" 
 						 
 						 aria-label="Close"   ><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>  Back To Dashboard</button>
 	</div>
@@ -58,7 +58,7 @@
 		 	<label class="control-label col-sm-3" for="email">Application Name:</label>
 		    <div class="col-sm-9">
 		      <!-- <p class="form-control-static">{{data.bureau}}</p> -->
-		      <input class="form-control" name ="appName" ng-model="data.appName" value="{{data.appName}}" ng-readonly="isEditEnabled"  >
+		      <input class="form-control" name ="appName" ng-model="data.appName" value="{{data.appName}}" ng-readonly="isEditEnabled "  >
 		       <div class="field-message alert alert-danger " ng-messages="frm.appName.$error" ng-show="frm.appName.$invalid" ng-cloak>
                     <div ng-message="required">App Name is required</div>
        
