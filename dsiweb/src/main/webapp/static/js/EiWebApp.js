@@ -19,11 +19,11 @@ app.config(
 		        controller  : "PersonSearchCtrl"
 		    })
 		    .when("/detail", {
-		        templateUrl : "PersonDetail.html", 
+		        templateUrl : "PersonAddEdit.html", 
 		        controller  : "PersonDetailCtrl"
 		    })
 		    .when("/detail/:personDetailId", {
-		        templateUrl : "PersonDetail.html", 
+		        templateUrl : "PersonAddEdit.html", 
 		        controller  : "PersonDetailCtrl"
 		    })
 		    .otherwise( {

@@ -5,19 +5,44 @@
 			<p></p>
 		</div>
 		<div id="search" >
-			<div class="input-group">
-				<span class="input-group-addon">Search Field</span> <input
+<!-- 			<div class="input-group">
+				
+				<span class="input-group-addon">Search Field</span><span> <input
 					id="input" type="text" class="form-control" name="searchinput"
 					placeholder="Type Bureau or App Name"
 					ng-model="searchText" 
 					ng-change="showSearchResults(searchText)"
-					ng-init="count=0" />
+					ng-init="count=0" /></span>
+					<span>
+					<input
+					id="input" type="checkbox" class="form-control" name="allresults"
+					placeholder="Type Bureau or App Name"
+					ng-model="searchAll" 
+					ng-change="showAllResults()"
+					ng-init="count=0" /></span>
+			</div> -->
+			<div >
+				<table>
+					<tr>
+						
+						<td></td>
+						<td class="input-group-addon">Search Field</td>
+						<td><input
+								id="input" type="text" class="form-control" name="searchinput"
+								placeholder="Type Bureau or App Name"
+								ng-model="searchText" 
+								ng-change="showSearchResults(searchText)"
+								ng-init="count=0" />
+						</td>
+						<td><button  class="btn  btn-block"  ng-click="showAllResults()"><h8>Get all</h8></button></td>
+					</tr>
+				</table>
 			</div>
 			<div><p><br/></p></div>
 			<div class="generic-container">
-			<div ng-init="checked=false" ng-if="checked" ui-grid="gridOptions"  ui-grid-exporter=""
-				ui-grid-resize-columns="" ui-grid-edit="" class="grid"></div>
-		</div>
+				<div ng-init="checked=false" ng-if="checked" ui-grid="gridOptions"  ui-grid-exporter=""
+					ui-grid-resize-columns="" ui-grid-edit="" class="grid"></div>
+			</div>
 		</div>
 		
 		<div id="myModal" class="modal fade" role="dialog">
@@ -36,7 +61,7 @@
 							<h4 class="text-center">{{detail.appName}}</h4>
 						</div>
 					</div>
-					<div ng-include="'PersonDetailt.html'"></div>
+					<div ng-include="'PersonDetailEdit.html'"></div>
 					</div>
 				</div>
 			</div>

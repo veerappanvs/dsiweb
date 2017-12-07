@@ -154,6 +154,19 @@ function PersonSearchCtrl($rootScope, $scope, $http, $location) {
 			  $scope.checked=false;
 	  };
 	  
+	  $scope.showAllResults = function(){
+		  console.log("Getting the allrecords page "+$scope.searchAll);
+		  $scope.getDataForURI('inv/inventory');
+			 /* if($scope.searchAll )
+			  {
+				$scope.getDataForURI('inv/inventory');
+				$scope.checked=false;
+		  		$scope.checked=$scope.searchAll;
+			  }
+	  		 else 
+	  			 $scope.checked=false;*/
+	  };
+	  
 /*	  $scope.detailPerson = function (){
 		  console.log(" detailId : "+detailId);
 		    $element.modal('show');
